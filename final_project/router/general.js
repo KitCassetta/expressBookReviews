@@ -74,4 +74,60 @@ public_users.get('/review/:isbn',function (req, res) {
     res.send(JSON.stringify(book["reviews"],null,4));
 });
 
+const axios = require('axios');
+
+// Task 10: Get the list of books available
+async function getBooks() {
+  try {
+    const response = await axios.get('http://localhost:5000/');
+    console.log(response.data);
+  } catch (error) {
+    console.error("Error fetching book list:", error);
+  }
+}
+
+// Call the function
+getBooks();
+
+// Task 11: Get book details based on ISBN
+async function getBookDetailsByISBN(isbn) {
+    try {
+      const response = await axios.get(`http://localhost:5000/isbn/${isbn}`);
+      console.log(response.data);
+    } catch (error) {
+      console.error(`Error fetching book with ISBN ${isbn}:`, error);
+    }
+  }
+  
+  // Call the function with an example ISBN
+  getBookDetailsByISBN('10');
+  
+
+// Task 12: Get book details based on author
+async function getBooksByAuthor(author) {
+  try {
+    const response = await axios.get(`http://localhost:5000/author/${author}`);
+    console.log(response.data);
+  } catch (error) {
+    console.error(`Error fetching books by author ${author}:`, error);
+  }
+}
+
+// Call the function with an example author
+getBooksByAuthor('Unknown');
+
+// Task 13: Get book details based on title
+async function getBooksByTitle(title) {
+    try {
+      const response = await axios.get(`http://localhost:5000/title/${title}`);
+      console.log(response.data);
+    } catch (error) {
+      console.error(`Error fetching book with title ${title}:`, error);
+    }
+  }
+  
+  // Call the function with an example title
+  getBooksByTitle('Harry Potter');
+  
+
 module.exports.general = public_users;
